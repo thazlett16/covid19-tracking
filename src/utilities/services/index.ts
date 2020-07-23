@@ -1,1 +1,2 @@
-export * from "./example_service"
+export * from "./disease_covid_service"
+export * from "./http-common"
