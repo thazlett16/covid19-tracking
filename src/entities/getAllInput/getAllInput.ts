@@ -1,19 +1,10 @@
 import {
-  ICountryInput,
-  ICountryInputData
-} from "./countryInput.types"
+  IGetAllInput,
+  IGetAllInputData
+} from "./getAllInput.types"
 
-export class CountryInput implements ICountryInput {
-  readonly updated: string
-  readonly country: string
-  readonly countryInfo: {
-    _id: number
-    iso2: string
-    iso3: string
-    lat: number
-    long: number
-    flag: string
-  }
+export class GetAllInput implements IGetAllInput {
+  readonly updated: number
   readonly cases: number
   readonly todayCases: number
   readonly deaths: number
@@ -27,18 +18,16 @@ export class CountryInput implements ICountryInput {
   readonly tests: number
   readonly testsPerOneMillion: number
   readonly population: number
-  readonly continent: string
   readonly oneCasePerPeople: number
   readonly oneDeathPerPeople: number
   readonly oneTestPerPeople: number
   readonly activePerOneMillion: number
   readonly recoveredPerOneMillion: number
   readonly criticalPerOneMillion: number
+  readonly affectedCountries: number
 
-  constructor(data: ICountryInputData) {
+  constructor(data: IGetAllInputData) {
     this.updated = data.updated
-    this.country = data.country
-    this.countryInfo = data.countryInfo
     this.cases = data.cases
     this.todayCases = data.todayCases
     this.deaths = data.deaths
@@ -52,12 +41,12 @@ export class CountryInput implements ICountryInput {
     this.tests = data.tests
     this.testsPerOneMillion = data.testsPerOneMillion
     this.population = data.population
-    this.continent = data.continent
-    this.oneCasePerPeople = data.oneCasePerPeople
+    this.oneCasePerPeople = data.casesPerOneMillion
     this.oneDeathPerPeople = data.oneDeathPerPeople
     this.oneTestPerPeople = data.oneTestPerPeople
     this.activePerOneMillion = data.activePerOneMillion
     this.recoveredPerOneMillion = data.recoveredPerOneMillion
     this.criticalPerOneMillion = data.criticalPerOneMillion
+    this.affectedCountries = data.affectedCountries
   }
 }

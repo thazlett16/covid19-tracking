@@ -1,2 +1,3 @@
-export * from "./disease_covid_service"
-export * from "./http-common"
+export * from "./diseaseCovidService"
+export * from "./provider"
+export * from "./provider.types"

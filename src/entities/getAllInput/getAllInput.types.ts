@@ -1,14 +1,5 @@
-export interface ICountryInputData {
-  updated: string
-  country: string
-  countryInfo: {
-    _id: number
-    iso2: string
-    iso3: string
-    lat: number
-    long: number
-    flag: string
-  }
+export interface IGetAllInputData {
+  updated: number
   cases: number
   todayCases: number
   deaths: number
@@ -22,15 +13,15 @@ export interface ICountryInputData {
   tests: number
   testsPerOneMillion: number
   population: number
-  continent: string
   oneCasePerPeople: number
   oneDeathPerPeople: number
   oneTestPerPeople: number
   activePerOneMillion: number
   recoveredPerOneMillion: number
   criticalPerOneMillion: number
+  affectedCountries: number
 }
 
-export interface ICountryInput extends ICountryInputData{
-  
+export interface IGetAllInput extends IGetAllInputData {
+
 }
