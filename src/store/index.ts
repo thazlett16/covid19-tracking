@@ -1,11 +1,28 @@
 import Vue from "vue"
-import Vuex from "vuex"
+import Vuex, { StoreOptions } from "vuex"
+import { RootState } from "./index.types"
+
+import { countryDataModule } from "./countryData"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-})
+const store: StoreOptions<RootState> = {
+  state: {
+    globalLoadingVal: 0
+  },
+  getters: {
+    isGlobalLoading(state): boolean {
+      return state.globalLoadingVal === 0
+    }
+  },
+  mutations: {
+    setGlobalLoading(state, newValue: number): void {
+      state.globalLoadingVal += newValue
+    }
+  },
+  modules: {
+    countryDataModule
+  }
+}
+
+export default new Vuex.Store<RootState>(store)

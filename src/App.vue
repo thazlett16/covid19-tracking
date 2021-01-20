@@ -1,5 +1,8 @@
 <template>
-  <v-app id="inspire">
+  <v-app 
+    id="inspire"
+    class="dark"
+  >
     <v-navigation-drawer
       v-model="navDrawer"
       app
@@ -31,28 +34,16 @@
     <v-app-bar
       app
       clipped-left
-      color="red"
+      color="cyan lighten-2"
       dark
     >
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="navDrawer = !navDrawer" />
         <v-toolbar-title>Covid-19 Data Tracker</v-toolbar-title>
       </div>
-
       <v-spacer />
-
-      <div class="app__selector d-flex align-content-center my-auto">
-        <v-select
-          v-model="selected"
-          :items="countryOptions"
-          item-text="country"
-          item-value="countryCode"
-          item-color="red"
-          outlined
-        />
-      </div>
+      <CountryDropdown />
     </v-app-bar>
-
     <v-main>
       <router-view />
     </v-main>
@@ -61,14 +52,14 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import { CovidDataService } from "@/utilities"
-import { CountryInput, CountryOption } from "@/entities/countryInput"
+import CountryDropdown from "./components/CountryDropdown.vue"
 
-@Component({})
+@Component({
+  components: {
+    CountryDropdown
+  }
+})
 export default class App extends Vue{
-  private countryData: Array<CountryInput> = []
-  private countryOptions: Array<CountryOption> = []
-  private selected = "Woldwide"
   private navDrawer = false
   private ourRoutes = [
     { icon: "view_module", title: "Home", to: "/"},
@@ -76,24 +67,6 @@ export default class App extends Vue{
   ]
   private selectedPage = 0
 
-  mounted(): void {
-    CovidDataService.fetchCountries().then((response) => {
-      this.countryData = response.data
-    }).finally(() => {
-      if (this.countryData.length >= 1) {
-        this.countryOptions.push({
-          country: "Worldwide",
-          countryCode: "Woldwide"
-        })
-        this.countryData.forEach((countryInputData: CountryInput) => {
-          this.countryOptions.push({
-            country: countryInputData.country,
-            countryCode: countryInputData.countryInfo.iso3
-          })
-        })
-      }
-    })
-  }
 }
 </script>
 
@@ -102,10 +75,6 @@ export default class App extends Vue{
 * {
   margin: 0;
   padding: 0;
-}
-
-.app__selector {
-  min-width: 350px;
 }
 
 </style>
